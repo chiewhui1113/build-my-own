@@ -3,6 +3,8 @@
 My notes from working through Ruslan Spivak's "Let's Build A Web Server" (LSBAWS) tutorial,
 rebuilding an HTTP server from sockets up to a concurrent, framework-compatible server.
 
+**Difficulty:** ⭐⭐ — fun, with visual components (drawings) and easy to grasp. Good for beginners.
+
 ## Part 1 — A bare-bones socket server (`part1/webserver1.py`)
 
 Key things I learned:

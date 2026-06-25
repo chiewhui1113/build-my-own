@@ -2,6 +2,8 @@
 
 Simple blockchain in Go.
 
+**Difficulty:** ⭐ — very short and simple.
+
 ## Key things I learned
 
 - How hashing links blocks into an immutable chain (each hash depends on the one before)
