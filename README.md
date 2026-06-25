@@ -27,7 +27,7 @@ This roadmap is heavily inspired by **Build Your Own X**, an incredible collecti
 | ⏳ | — | — | C | Network Programming | [Link](https://beej.us/guide/bgnet/) | — |
 | ⏳ | — | — | Python | Python Interpreter | [Link](https://aosabook.org/en/500L/a-python-interpreter-written-in-python.html) | — |
 | ⏳ | — | — | Python | Search Engine | [Link](https://www.youtube.com/watch?v=cY7pE7vX6MU) | — |
-| ⏳ | — | — | Python | Web Server | [Link](https://ruslanspivak.com/lsbaws-part1/) | — |
+| ✅ | 2026-06-25 | 2026-06-25 | Python | Web Server | [Link](https://ruslanspivak.com/lsbaws-part1/) | [Notes](./web-server/README.md) |
 
 Legend:
 
