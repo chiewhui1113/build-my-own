@@ -1,34 +1,40 @@
-#![no_std] // Don't link the Rust standard library 
-#![no_main] // Disable all Rust-level entry points
-
-mod vga_buffer;
+#![no_std]
+#![no_main]
+#![feature(custom_test_frameworks)]
+#![test_runner(ch_os::test_runner)]
+#![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
+use ch_os::println;
 
-static HELLO: &[u8] = b"Hello World!";
-
-#[unsafe(no_mangle)] // Don't mangle the name of this function 
-// ! means not allowed to ever return 
-// Entry point invoked by the os or bootloader
+#[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
-    // First address that maps to the screen
-    let vga_buffer = 0xb8000 as *mut u8;
+    println!("Hello World{}", "!");
 
-    for (i, &byte) in HELLO.iter().enumerate() {
-        unsafe {
-            // Byte 1: character
-            *vga_buffer.offset(i as isize * 2) = byte;
-            // Byte 2: color
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
-    }
+    ch_os::init();
 
-    // Keeps OS alive
+    // trigger a page fault
+    unsafe {
+        *(0xdeadbeef as *mut u8) = 42;
+    };
+
+    #[cfg(test)]
+    test_main();
+
+    println!("It did not crash!");
     loop {}
 }
 
-// Function called on panic
+/// This function is called on panic.
+#[cfg(not(test))]
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
     loop {}
+}
+
+#[cfg(test)]
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    ch_os::test_panic_handler(info)
 }
